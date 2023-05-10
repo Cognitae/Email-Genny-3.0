@@ -17,10 +17,10 @@ class EmailGenny(ctk.CTk):
 
         # Frame for template selection radio buttons
         self.template_frame = ctk.CTkFrame(self, border_width=1, corner_radius=10)
-        self.template_frame.place(relx=0, rely=1, y=-75, x=75, anchor='sw')
+        self.template_frame.place(relx=0, rely=1, y=-80, x=40, anchor='sw')
 
         # Label for the template selection
-        self.template_label = ctk.CTkLabel(self.template_frame, text="Templates")
+        self.template_label = ctk.CTkLabel(self.template_frame, text="                Templates                ")
         self.template_label.grid(row=0, column=0, padx=10, pady=10)
 
         # Radio buttons for template selection
@@ -73,8 +73,8 @@ class EmailGenny(ctk.CTk):
         self.copy_button = ctk.CTkButton(self, text="Copy", command=self.copy_email , width=20)
         self.edit_button = ctk.CTkButton(self, text="Edit Templates", command=self.edit_templates, width=120)
           
-        self.generate_button.grid(row=3, column=1, padx=20, pady=10)
-        self.copy_button.grid(row=3, column=1, padx=(500, 10), pady=10)
+        self.generate_button.grid(row=3, column=1, padx=20, pady=25)
+        self.copy_button.grid(row=3, column=1, padx=(500, 10), pady=25)
         self.edit_button.grid(row=1, column=0, padx=20, pady=20)
         
          # Set up the main window
@@ -89,7 +89,7 @@ class EmailGenny(ctk.CTk):
         self.darkmode_switch = ctk.CTkSwitch(self, text="Toggle Dark Mode", variable=self.appearance_mode,
                                              onvalue="dark", offvalue="light", command=self.toggle_dark_mode)
         # To place the switch at the bottom left, we use the place() method instead of grid().
-        self.darkmode_switch.place(relx=0, rely=1, anchor='sw')
+        self.darkmode_switch.place(relx=0, rely=1, x=20, y=-20, anchor='sw')
 
     def toggle_dark_mode(self):
         # Set the appearance mode based on the switch's value
