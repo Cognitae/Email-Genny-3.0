@@ -17,10 +17,10 @@ class EmailGenny(ctk.CTk):
 
         # Frame for template selection radio buttons
         self.template_frame = ctk.CTkFrame(self, border_width=1, corner_radius=10)
-        self.template_frame.place(relx=0, rely=1, y=-80, x=40, anchor='sw')
+        self.template_frame.grid(row=2, column=0, padx=25, pady=(100,0))
 
         # Label for the template selection
-        self.template_label = ctk.CTkLabel(self.template_frame, text="                Templates                ")
+        self.template_label = ctk.CTkLabel(self.template_frame, text="              Templates              ")
         self.template_label.grid(row=0, column=0, padx=10, pady=10)
 
         # Radio buttons for template selection
@@ -34,12 +34,12 @@ class EmailGenny(ctk.CTk):
 
         # Textbox for the generated email
         self.email_textbox = ctk.CTkTextbox(self, width=550, height=250)
-        self.email_textbox.grid(row=2, column=1, padx=105, pady=(30,0))
+        self.email_textbox.grid(row=2, column=1, padx=(5,150), pady=(30,0))
 
 
         # Fields for the variables
         self.var_frame = ctk.CTkFrame(self)
-        self.var_frame.grid(row=0, column=1, padx=20, pady=20)
+        self.var_frame.grid(row=0, column=1, padx=(20,160), pady=20)
 
         self.var_labels = []
         self.var_entries = []
@@ -66,16 +66,16 @@ class EmailGenny(ctk.CTk):
             
             # Label and Entry for the generated subject line
             self.subject_entry = ctk.CTkEntry(self, width=550)
-            self.subject_entry.grid(row=1, column=1, padx=105, pady=(40,0))
+            self.subject_entry.grid(row=1, column=1, padx=(55,200), pady=(40,0))
         
         # Buttons
         self.generate_button = ctk.CTkButton(self, text="Generate Email", command=self.generate_email,)
         self.copy_button = ctk.CTkButton(self, text="Copy", command=self.copy_email , width=20)
         self.edit_button = ctk.CTkButton(self, text="Edit Templates", command=self.edit_templates, width=120)
           
-        self.generate_button.grid(row=3, column=1, padx=20, pady=25)
-        self.copy_button.grid(row=3, column=1, padx=(500, 10), pady=25)
-        self.edit_button.grid(row=1, column=0, padx=20, pady=20)
+        self.generate_button.grid(row=3, column=1, padx=(50,225), pady=25)
+        self.copy_button.grid(row=3, column=1, padx=(400, 40), pady=25)
+        self.edit_button.place(x=47, y=285)
         
          # Set up the main window
         self.title("E-Mail Genny")
