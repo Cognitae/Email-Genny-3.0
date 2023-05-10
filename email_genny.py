@@ -17,7 +17,7 @@ class EmailGenny(ctk.CTk):
 
         # Frame for template selection radio buttons
         self.template_frame = ctk.CTkFrame(self, border_width=1, corner_radius=10)
-        self.template_frame.grid(row=0, column=0, padx=20, pady=20)
+        self.template_frame.place(relx=0, rely=1, y=-75, x=75, anchor='sw')
 
         # Label for the template selection
         self.template_label = ctk.CTkLabel(self.template_frame, text="Templates")
