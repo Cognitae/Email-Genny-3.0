@@ -3,6 +3,7 @@ import tkinter
 import customtkinter as ctk
 from PIL import Image, ImageTk #for image handling
 import pyperclip  # for clipboard operations
+from tkinter import Toplevel, Label
 
 class TemplatesPage(ctk.CTk):
     def __init__(self, master=None):
@@ -137,9 +138,9 @@ class EmailGenny(ctk.CTk):
         self.template_label.grid(row=0, column=0, padx=10, pady=10)
 
         # Radio buttons for template selection
-        self.template_radio_1 = ctk.CTkRadioButton(self.template_frame, text="Template 1", variable=self.template_var, value=1)
-        self.template_radio_2 = ctk.CTkRadioButton(self.template_frame, text="Template 2", variable=self.template_var, value=2)
-        self.template_radio_3 = ctk.CTkRadioButton(self.template_frame, text="Template 3", variable=self.template_var, value=3)
+        self.template_radio_1 = ctk.CTkRadioButton(self.template_frame, text="Initial Email", variable=self.template_var, value=1)
+        self.template_radio_2 = ctk.CTkRadioButton(self.template_frame, text=" In The Past ", variable=self.template_var, value=2)
+        self.template_radio_3 = ctk.CTkRadioButton(self.template_frame, text="  No Reply   ", variable=self.template_var, value=3)
         self.template_radio_1.grid(row=1, column=0, padx=10, pady=10)
         self.template_radio_2.grid(row=2, column=0, padx=10, pady=10)
         self.template_radio_3.grid(row=3, column=0, padx=10, pady=10)
@@ -324,6 +325,33 @@ class EmailGenny(ctk.CTk):
 
         # Copy the email to the clipboard
         pyperclip.copy(email_text)
+        
+        # Create a new Toplevel window
+        pop_up = Toplevel(self)
+        
+        # Customize the appearance of the pop-up
+        pop_up.geometry("175x50")  # set size
+        pop_up.configure(bg="black")  # set background color
+
+        # Add a label with your message
+        Label(pop_up, text="Text copied to clipboard!", bg="black", fg="white").pack()
+
+        # Schedule the pop-up to destroy itself after 2 seconds (2000 milliseconds)
+        pop_up.after(1000, pop_up.destroy)
+        # Calculate the position of the pop-up window
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+        window_x = self.winfo_x()
+        window_y = self.winfo_y()
+
+        pop_up_width = 200
+        pop_up_height = 50
+
+        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
+        pop_up_y = window_y
+
+        # Set the position of the pop-up window
+        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")
 
     def edit_templates(self):
         try:
