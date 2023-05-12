@@ -229,6 +229,15 @@ class EmailGenny(ctk.CTk):
             return f"{here_text} to use in our video on {video}."
         else:
             return f"{here_text}."    
+    
+    @staticmethod
+    def generate_sentence(here_text, module, video):
+        if module:
+            return EmailGenny.generate_module_sentence(here_text, module)
+        elif video:
+            return EmailGenny.generate_video_sentence(here_text, video)
+        else:
+            return f"{here_text}."
         
 
     def generate_email(self):
@@ -263,7 +272,8 @@ class EmailGenny(ctk.CTk):
         self.subject_entry.insert(0, subject_line)  # Insert the new subject line
 
         # Generate module sentence based on whether module is provided
-        module_sentence = self.generate_module_sentence(here_text, module)
+        sentence = self.generate_sentence(here_text, module, video)
+
 
         # Retrieve the selected template and format it with actual values
         selected_template_index = self.template_var.get() - 1  # Subtract 1 because the radio buttons start at 1
@@ -275,7 +285,7 @@ class EmailGenny(ctk.CTk):
             image_text=image_text,
             imag_text=imag_text,
             some_text=some_text,
-            here_text=module_sentence,  # Use the module_sentence here
+            here_text=sentence,  # Use the module_sentence here
             company_name=company_name,
             video=video
         )
