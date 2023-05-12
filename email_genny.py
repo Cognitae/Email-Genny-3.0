@@ -155,7 +155,7 @@ class EmailGenny(ctk.CTk):
 
         self.var_labels = []
         self.var_entries = []
-        var_names = ["Company Name", "Contact Name", "Craft", "Module", "Number of Images", "Custom Var"]
+        var_names = ["Company Name", "Contact Name", "Craft", "Module", "Number of Images", "Video"]
 
         for i, name in enumerate(var_names):
             row = i // 2
@@ -223,6 +223,12 @@ class EmailGenny(ctk.CTk):
             return f"{here_text} to use in our module on {module}."
         else:
             return f"{here_text}."
+    @staticmethod    
+    def generate_video_sentence(here_text, video):
+        if video:
+            return f"{here_text} to use in our video on {video}."
+        else:
+            return f"{here_text}."    
         
 
     def generate_email(self):
@@ -233,7 +239,7 @@ class EmailGenny(ctk.CTk):
         module = self.var_entries[3].get().strip()  # Module
         num_images = int(self.var_entries[4].get().strip())  # Number of Images
         image_numbers = list(range(1, num_images + 1))
-
+        video = self.var_entries[5].get().strip()  # Video
 
         # Determine the text based on the number of images
         if len(image_numbers) == 1:
@@ -270,7 +276,8 @@ class EmailGenny(ctk.CTk):
             imag_text=imag_text,
             some_text=some_text,
             here_text=module_sentence,  # Use the module_sentence here
-            company_name=company_name
+            company_name=company_name,
+            video=video
         )
         self.email_textbox.delete("1.0", tkinter.END)  # Clear the previous email body
         self.email_textbox.insert(tkinter.END, generated_email)  # Insert the new email body
