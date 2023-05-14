@@ -16,7 +16,7 @@ class TemplatesPage(ctk.CTk):
 
         # Set up the main window
         self.title("E-Mail Genny - Templates")
-        self.geometry("900x610")
+        self.geometry("900x580")
 
         # Textboxes for the email templates
         self.template_textbox_1 = ctk.CTkTextbox(self, width=600, height=150)
@@ -77,6 +77,34 @@ class TemplatesPage(ctk.CTk):
         # Save the updated templates back to the JSON file
         with open("templates.json", "w") as f:
             json.dump(templates, f)
+            
+        # Create a new Toplevel window
+        pop_up = Toplevel(self)
+        
+        # Customize the appearance of the pop-up
+        pop_up.geometry("175x50")  # set size
+        pop_up.configure(bg="black")  # set background color
+        pop_up.overrideredirect(True)  # remove border
+        pop_up.configure(relief="ridge")  # round the corners
+        # Add a label with your message
+        Label(pop_up, text="Template Successfully Saved!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
+
+        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
+        pop_up.after(1000, pop_up.destroy)
+        # Calculate the position of the pop-up window
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+        window_x = self.winfo_x()
+        window_y = self.winfo_y()
+
+        pop_up_width = 125
+        pop_up_height = 25
+
+        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
+        pop_up_y = window_y
+
+        # Set the position of the pop-up window
+        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")    
 
     def save_template_2(self):
         template_text = self.template_textbox_2.get("1.0", "end-1c")
@@ -96,6 +124,34 @@ class TemplatesPage(ctk.CTk):
 
         with open("templates.json", "w") as f:
             json.dump(templates, f)
+            
+        # Create a new Toplevel window
+        pop_up = Toplevel(self)
+        
+        # Customize the appearance of the pop-up
+        pop_up.geometry("175x50")  # set size
+        pop_up.configure(bg="black")  # set background color
+        pop_up.overrideredirect(True)  # remove border
+        pop_up.configure(relief="ridge")  # round the corners
+        # Add a label with your message
+        Label(pop_up, text="Template Successfully Saved!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
+
+        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
+        pop_up.after(1000, pop_up.destroy)
+        # Calculate the position of the pop-up window
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+        window_x = self.winfo_x()
+        window_y = self.winfo_y()
+
+        pop_up_width = 125
+        pop_up_height = 25
+
+        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
+        pop_up_y = window_y
+
+        # Set the position of the pop-up window
+        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")      
 
     def save_template_3(self):
         template_text = self.template_textbox_3.get("1.0", "end-1c")
@@ -116,7 +172,35 @@ class TemplatesPage(ctk.CTk):
         with open("templates.json", "w") as f:
             json.dump(templates, f)
             
-            
+        # Create a new Toplevel window
+        pop_up = Toplevel(self)
+        
+        # Customize the appearance of the pop-up
+        pop_up.geometry("175x50")  # set size
+        pop_up.configure(bg="black")  # set background color
+        pop_up.overrideredirect(True)  # remove border
+        pop_up.configure(relief="ridge")  # round the corners
+        # Add a label with your message
+        Label(pop_up, text="Template Successfully Saved!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
+
+        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
+        pop_up.after(1000, pop_up.destroy)
+        # Calculate the position of the pop-up window
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+        window_x = self.winfo_x()
+        window_y = self.winfo_y()
+
+        pop_up_width = 125
+        pop_up_height = 25
+
+        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
+        pop_up_y = window_y
+
+        # Set the position of the pop-up window
+        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")
+
+    
             
 class EmailGenny(ctk.CTk):
     def __init__(self):
@@ -127,27 +211,27 @@ class EmailGenny(ctk.CTk):
         
         # Set up the main window
         self.title("E-Mail Genny")
-        self.geometry("900x610")
+        self.geometry("900x580")
 
         # Frame for template selection radio buttons
         self.template_frame = ctk.CTkFrame(self, border_width=1, corner_radius=10)
-        self.template_frame.grid(row=2, column=0, padx=25, pady=(100,0))
+        self.template_frame.grid(row=1, column=0, padx=25, pady=(50,80))
 
         # Label for the template selection
-        self.template_label = ctk.CTkLabel(self.template_frame, text="              Templates              ")
-        self.template_label.grid(row=0, column=0, padx=10, pady=10)
+        self.template_label = ctk.CTkLabel(self.template_frame, text="         Templates         ")
+        self.template_label.grid(row=0, column=0, padx=10, pady=(20,10))
 
         # Radio buttons for template selection
         self.template_radio_1 = ctk.CTkRadioButton(self.template_frame, text="Initial Email", variable=self.template_var, value=1)
-        self.template_radio_2 = ctk.CTkRadioButton(self.template_frame, text=" In The Past ", variable=self.template_var, value=2)
-        self.template_radio_3 = ctk.CTkRadioButton(self.template_frame, text="  No Reply   ", variable=self.template_var, value=3)
+        self.template_radio_2 = ctk.CTkRadioButton(self.template_frame, text="In The Past ", variable=self.template_var, value=2)
+        self.template_radio_3 = ctk.CTkRadioButton(self.template_frame, text="No Reply   ", variable=self.template_var, value=3)
         self.template_radio_1.grid(row=1, column=0, padx=10, pady=10)
         self.template_radio_2.grid(row=2, column=0, padx=10, pady=10)
         self.template_radio_3.grid(row=3, column=0, padx=10, pady=10)
 
         # Textbox for the generated email
         self.email_textbox = ctk.CTkTextbox(self, width=550, height=250)
-        self.email_textbox.grid(row=2, column=1, padx=(5,150), pady=(30,0))
+        self.email_textbox.grid(row=1, column=1, padx=(5,150), pady=(40,0))
         
         
         # Fields for the variables
@@ -175,20 +259,20 @@ class EmailGenny(ctk.CTk):
 
         # Label and Entry for the generated subject line
         self.subject_entry = ctk.CTkEntry(self, width=550)
-        self.subject_entry.grid(row=1, column=1, padx=(55,200), pady=(40,0))
+        self.subject_entry.grid(row=1, column=1, padx=(55,200), pady=(0,290))
 
         # Buttons
         self.generate_button = ctk.CTkButton(self, text="Generate Email", command=self.generate_email,)
         self.copy_button = ctk.CTkButton(self, text="Copy", command=self.copy_email , width=20)
         self.edit_button = ctk.CTkButton(self, text="Edit Templates", command=self.edit_templates, width=120)
 
-        self.generate_button.grid(row=3, column=1, padx=(50,225), pady=(15,20))
-        self.copy_button.grid(row=3, column=1, padx=(400, 40), pady=(15,20))
-        self.edit_button.place(x=47, y=300)
+        self.generate_button.grid(row=3, column=1, padx=(50,225), pady=(15,0))
+        self.copy_button.grid(row=3, column=1, padx=(400, 40), pady=(15,0))
+        self.edit_button.place(x=47, y=475)
 
         # Set up the main window
         self.title("E-Mail Genny")
-        self.geometry("900x610")
+        self.geometry("900x580")
 
         # Initialize the appearance mode as Dark Mode
         self.appearance_mode = ctk.StringVar(value="dark")
@@ -332,11 +416,12 @@ class EmailGenny(ctk.CTk):
         # Customize the appearance of the pop-up
         pop_up.geometry("175x50")  # set size
         pop_up.configure(bg="black")  # set background color
-
+        pop_up.overrideredirect(True)  # remove border
+        pop_up.configure(relief="ridge")  # round the corners
         # Add a label with your message
-        Label(pop_up, text="Text copied to clipboard!", bg="black", fg="white").pack()
+        Label(pop_up, text="Copied to clipboard!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
 
-        # Schedule the pop-up to destroy itself after 2 seconds (2000 milliseconds)
+        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
         pop_up.after(1000, pop_up.destroy)
         # Calculate the position of the pop-up window
         window_width = self.winfo_width()
@@ -344,8 +429,8 @@ class EmailGenny(ctk.CTk):
         window_x = self.winfo_x()
         window_y = self.winfo_y()
 
-        pop_up_width = 200
-        pop_up_height = 50
+        pop_up_width = 125
+        pop_up_height = 25
 
         pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
         pop_up_y = window_y
