@@ -14,7 +14,7 @@ class TemplatesPage(ctk.CTk):
         # Hide the master window
         self.master.withdraw()
 
-        # Set up the main window
+        # Set up the main window20
         self.title("E-Mail Genny - Templates")
         self.geometry("900x580")
 
@@ -32,9 +32,9 @@ class TemplatesPage(ctk.CTk):
         self.save_button_2 = ctk.CTkButton(self, text="Save Template 2", command=self.save_template_2,)
         self.save_button_3 = ctk.CTkButton(self, text="Save Template 3", command=self.save_template_3,)
 
-        self.save_button_1.grid(row=0, column=0, padx=20, pady=(20, 0), sticky='sw')
-        self.save_button_2.grid(row=1, column=0, padx=20, pady=(20, 0), sticky='sw')
-        self.save_button_3.grid(row=2, column=0, padx=20, pady=(20, 0), sticky='sw')
+        self.save_button_1.grid(row=0, column=1, padx=(0,20), pady=(20, 0), sticky='se')
+        self.save_button_2.grid(row=1, column=1, padx=(0,20), pady=(20, 0), sticky='se')
+        self.save_button_3.grid(row=2, column=1, padx=(0,20), pady=(20, 0), sticky='se')
         
         # Load the templates from the JSON file
         try:
@@ -50,7 +50,7 @@ class TemplatesPage(ctk.CTk):
 
         # Buttons
         self.back_button = ctk.CTkButton(self, text="Back", command=self.go_back)
-        self.back_button.grid(row=2, column=1, padx=(20,20), pady=(180,0), sticky="se")
+        self.back_button.grid(row=2, column=0, padx=(20,20), pady=(150,0), sticky="se")
         
     def go_back(self):
         # Call the master's go_back method
@@ -215,7 +215,7 @@ class EmailGenny(ctk.CTk):
 
         # Frame for template selection radio buttons
         self.template_frame = ctk.CTkFrame(self, border_width=1, corner_radius=10)
-        self.template_frame.grid(row=1, column=0, padx=25, pady=(50,80))
+        self.template_frame.grid(row=1, column=0, padx=(30,0), pady=(50,80))
 
         # Label for the template selection
         self.template_label = ctk.CTkLabel(self.template_frame, text="         Templates         ")
@@ -231,8 +231,9 @@ class EmailGenny(ctk.CTk):
 
         # Textbox for the generated email
         self.email_textbox = ctk.CTkTextbox(self, width=550, height=250)
-        self.email_textbox.grid(row=1, column=1, padx=(5,150), pady=(40,0))
-        
+        self.email_textbox.insert(1.0, "Email Generated Here...") #Placeolder text
+        self.email_textbox.bind('<FocusIn>') #self.clear_textbox) #Clear placeholder text when clicked
+        self.email_textbox.grid(row=1, column=1, padx=(5,150), pady=(40,0)) 
         
         # Fields for the variables
         self.var_frame = ctk.CTkFrame(self)
@@ -259,16 +260,19 @@ class EmailGenny(ctk.CTk):
 
         # Label and Entry for the generated subject line
         self.subject_entry = ctk.CTkEntry(self, width=550)
+        self.subject_entry.insert(0, "Subject Generated Here...")  # Insert guiding text
+        self.subject_entry.bind('<FocusIn>')  # Bind function to clear text on focus
         self.subject_entry.grid(row=1, column=1, padx=(55,200), pady=(0,290))
+
 
         # Buttons
         self.generate_button = ctk.CTkButton(self, text="Generate Email", command=self.generate_email,)
         self.copy_button = ctk.CTkButton(self, text="Copy", command=self.copy_email , width=20)
-        self.edit_button = ctk.CTkButton(self, text="Edit Templates", command=self.edit_templates, width=120)
+        self.edit_button = ctk.CTkButton(self, text="Edit Templates", command=self.edit_templates, width=135)
 
         self.generate_button.grid(row=3, column=1, padx=(50,225), pady=(15,0))
         self.copy_button.grid(row=3, column=1, padx=(400, 40), pady=(15,0))
-        self.edit_button.place(x=47, y=475)
+        self.edit_button.place(x=30, y=460)
 
         # Set up the main window
         self.title("E-Mail Genny")
@@ -288,7 +292,7 @@ class EmailGenny(ctk.CTk):
         image = image.resize((200, 200), Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(image) 
         self.logo_label = ctk.CTkLabel(self, image=self.logo, text="")  # Create a label with the logo
-        self.logo_label.grid(row=0, column=0, padx=0, pady=0)  # Place the logo label in the grid
+        self.logo_label.place(x=0, y=0)  # Place the logo label in the grid
         
         self.load_templates()  # Add this line at the end of the __init__ method
         # Load the templates from the JSON file
@@ -305,13 +309,13 @@ class EmailGenny(ctk.CTk):
     @staticmethod
     def generate_module_sentence(here_text, module):
         if module:
-            return f"{here_text} to use in our module on {module}."
+            return f"""{here_text} to use in our module on "{module}"."""
         else:
             return f"{here_text}."
     @staticmethod    
     def generate_video_sentence(here_text, video):
         if video:
-            return f"{here_text} to use in our video on {video}."
+            return f"""{here_text} to use in our video on "{video}"."""
         else:
             return f"{here_text}."    
     
@@ -355,6 +359,7 @@ class EmailGenny(ctk.CTk):
         subject_line = f"Permission to use {company_name} {imag_text} for NCCER {craft} Curriculum"
         self.subject_entry.delete(0, tkinter.END)  # Clear the previous subject line
         self.subject_entry.insert(0, subject_line)  # Insert the new subject line
+
 
         # Generate module sentence based on whether module is provided
         sentence = self.generate_sentence(here_text, module, video)
@@ -437,6 +442,10 @@ class EmailGenny(ctk.CTk):
 
         # Set the position of the pop-up window
         pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")
+        
+    #def clear_subject_entry(self, event):
+        #self.subject_entry.delete(0, 'end')  # Clear the entry field
+    
 
     def edit_templates(self):
         try:
