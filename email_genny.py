@@ -1,14 +1,14 @@
 import json
 import tkinter
 import customtkinter as ctk
-from PIL import Image, ImageTk #for image handling
+from PIL import Image, ImageTk
 import pyperclip  # for clipboard operations
 from tkinter import Toplevel, Label
 
 class TemplatesPage(ctk.CTk):
     def __init__(self, master=None):
         super().__init__()
-
+        
         self.master = master  # The master window (EmailGenny instance)
 
         # Hide the master window
@@ -19,22 +19,22 @@ class TemplatesPage(ctk.CTk):
         self.geometry("900x580")
 
         # Textboxes for the email templates
-        self.template_textbox_1 = ctk.CTkTextbox(self, width=600, height=150)
-        self.template_textbox_2 = ctk.CTkTextbox(self, width=600, height=150)
-        self.template_textbox_3 = ctk.CTkTextbox(self, width=600, height=150)
+        self.template_textbox_1 = ctk.CTkTextbox(self, width=600, height=125)
+        self.template_textbox_2 = ctk.CTkTextbox(self, width=600, height=125)
+        self.template_textbox_3 = ctk.CTkTextbox(self, width=600, height=125)
 
-        self.template_textbox_1.grid(row=0, column=1, padx=20, pady=20, sticky='w')
-        self.template_textbox_2.grid(row=1, column=1, padx=20, pady=20, sticky='w')
-        self.template_textbox_3.grid(row=2, column=1, padx=20, pady=20, sticky='w')
+        self.template_textbox_1.grid(row=0, column=1, padx=20, pady=30, sticky='e')
+        self.template_textbox_2.grid(row=1, column=1, padx=20, pady=30, sticky='e')
+        self.template_textbox_3.grid(row=2, column=1, padx=20, pady=30, sticky='e')
 
         # Buttons for saving the templates
         self.save_button_1 = ctk.CTkButton(self, text="Save Template 1", command=self.save_template_1,)
         self.save_button_2 = ctk.CTkButton(self, text="Save Template 2", command=self.save_template_2,)
         self.save_button_3 = ctk.CTkButton(self, text="Save Template 3", command=self.save_template_3,)
 
-        self.save_button_1.grid(row=0, column=1, padx=(0,20), pady=(20, 0), sticky='se')
-        self.save_button_2.grid(row=1, column=1, padx=(0,20), pady=(20, 0), sticky='se')
-        self.save_button_3.grid(row=2, column=1, padx=(0,20), pady=(20, 0), sticky='se')
+        self.save_button_1.grid(row=0, column=1, padx=(0,20), pady=(10, 0), sticky='se')
+        self.save_button_2.grid(row=1, column=1, padx=(0,20), pady=(10, 0), sticky='se')
+        self.save_button_3.grid(row=2, column=1, padx=(0,20), pady=(10, 0), sticky='se')
         
         # Load the templates from the JSON file
         try:
