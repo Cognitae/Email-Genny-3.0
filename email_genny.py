@@ -231,7 +231,7 @@ class EmailGenny(ctk.CTk):
 
         # Textbox for the generated email
         self.email_textbox = ctk.CTkTextbox(self, width=550, height=250)
-        self.email_textbox.insert(1.0, "Email Generated Here...") #Placeolder text
+        self.email_textbox.insert(1.0, "Email Generated Here...") #Placeholder text
         self.email_textbox.bind('<FocusIn>') #self.clear_textbox) #Clear placeholder text when clicked
         self.email_textbox.grid(row=1, column=1, padx=(5,150), pady=(40,0)) 
         
@@ -258,11 +258,20 @@ class EmailGenny(ctk.CTk):
             self.var_labels.append(label)
             self.var_entries.append(entry)
 
-        # Label and Entry for the generated subject line
-        self.subject_entry = ctk.CTkEntry(self, width=550)
+        # Frame for the subject line and the copy button
+        self.subject_frame = ctk.CTkFrame(self)
+        self.subject_frame.grid(row=1, column=1, padx=(55,200), pady=(0,290))
+
+        # Entry for the generated subject line
+        self.subject_entry = ctk.CTkEntry(self.subject_frame, width=520)  # Reduce the width to make room for the button
         self.subject_entry.insert(0, "Subject Generated Here...")  # Insert guiding text
         self.subject_entry.bind('<FocusIn>')  # Bind function to clear text on focus
-        self.subject_entry.grid(row=1, column=1, padx=(55,200), pady=(0,290))
+        self.subject_entry.pack(side=tkinter.LEFT)  # Pack to the left side of the frame
+
+        # Button for copying the subject line
+        self.copy_subject_button = ctk.CTkButton(self.subject_frame, text="C", command=self.copy_subject, width=20)
+        self.copy_subject_button.pack(side=tkinter.RIGHT)  # Pack to the right side of the frame
+
 
 
         # Buttons
@@ -445,6 +454,42 @@ class EmailGenny(ctk.CTk):
         
     #def clear_subject_entry(self, event):
         #self.subject_entry.delete(0, 'end')  # Clear the entry field
+        
+    def copy_subject(self):
+        # Get the generated subject line
+        subject_line = self.subject_entry.get()
+
+        # Copy the subject line to the clipboard
+        pyperclip.copy(subject_line)
+
+        # Create a new Toplevel window
+        pop_up = Toplevel(self)
+
+        # Customize the appearance of the pop-up
+        pop_up.geometry("175x50")  # set size
+        pop_up.configure(bg="black")  # set background color
+        pop_up.overrideredirect(True)  # remove border
+        pop_up.configure(relief="ridge")  # round the corners
+        # Add a label with your message
+        Label(pop_up, text="Subject line copied to clipboard!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
+
+        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
+        pop_up.after(1000, pop_up.destroy)
+        # Calculate the position of the pop-up window
+        window_width = self.winfo_width()
+        window_height = self.winfo_height()
+        window_x = self.winfo_x()
+        window_y = self.winfo_y()
+
+        pop_up_width = 125
+        pop_up_height = 25
+
+        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
+        pop_up_y = window_y
+
+        # Set the position of the pop-up window
+        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")
+    
     
 
     def edit_templates(self):
