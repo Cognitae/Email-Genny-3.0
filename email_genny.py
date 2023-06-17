@@ -14,9 +14,13 @@ class TemplatesPage(ctk.CTk):
         # Hide the master window
         self.master.withdraw()
 
-        # Set up the main window20
-        self.title("E-Mail Genny - Templates")
-        self.geometry("900x580")
+        # Load the image at the page level
+        #self.templates_image = ctk.CTkImage(light_image=Image.open("Resources/templates.png"),
+                                            #size=(200, 200))
+
+        # Use templates_image in the label
+        #self.templates_label = ctk.CTkLabel(self, image=self.templates_image, text="")
+        #self.templates_label.place(x=0, y=0)
 
         # Textboxes for the email templates
         self.template_textbox_1 = ctk.CTkTextbox(self, width=600, height=125)
@@ -206,6 +210,14 @@ class EmailGenny(ctk.CTk):
     def __init__(self):
         super().__init__()
         
+        # Load the image at the application level
+        self.logo_image = ctk.CTkImage(light_image=Image.open("Resources/logo.png"),
+                                        size=(200, 200))
+
+        # Then you can use logo_image wherever you need it
+        self.image_label = ctk.CTkLabel(self, image=self.logo_image, text="")
+        self.image_label.place(x=0, y=0)
+        
         # Initialize the selected template variable
         self.template_var = tkinter.IntVar()
         
@@ -296,12 +308,6 @@ class EmailGenny(ctk.CTk):
                                              onvalue="dark", offvalue="light", command=self.toggle_dark_mode)
         # To place the switch at the bottom left, we use the place() method instead of grid().
         self.darkmode_switch.place(relx=0, rely=1, x=20, y=-20, anchor='sw')
-
-        image = Image.open("Resources/logo.png")
-        image = image.resize((200, 200), Image.ANTIALIAS)
-        self.logo = ImageTk.PhotoImage(image) 
-        self.logo_label = ctk.CTkLabel(self, image=self.logo, text="")  # Create a label with the logo
-        self.logo_label.place(x=0, y=0)  # Place the logo label in the grid
         
         self.load_templates()  # Add this line at the end of the __init__ method
         # Load the templates from the JSON file
@@ -322,18 +328,18 @@ class EmailGenny(ctk.CTk):
         else:
             return f"{here_text}."
     @staticmethod    
-    def generate_video_sentence(here_text, video):
+    def generate_video_sentence(here_text, craft, video):
         if video:
-            return f"""{here_text} to use in our video on "{video}"."""
+            return f"""{here_text} to use in our CraftPro {craft} video on "{video}"."""
         else:
             return f"{here_text}."    
     
     @staticmethod
-    def generate_sentence(here_text, module, video):
+    def generate_sentence(here_text, module, craft, video):
         if module:
             return EmailGenny.generate_module_sentence(here_text, module)
         elif video:
-            return EmailGenny.generate_video_sentence(here_text, video)
+            return EmailGenny.generate_video_sentence(here_text, craft, video)
         else:
             return f"{here_text}."
         
@@ -371,7 +377,7 @@ class EmailGenny(ctk.CTk):
 
 
         # Generate module sentence based on whether module is provided
-        sentence = self.generate_sentence(here_text, module, video)
+        sentence = self.generate_sentence(here_text, module, craft, video)
 
 
         # Retrieve the selected template and format it with actual values
