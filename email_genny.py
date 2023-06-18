@@ -1,5 +1,6 @@
 import json
 import tkinter
+from CTkMessagebox import CTkMessagebox
 import customtkinter as ctk
 from PIL import Image, ImageTk
 import pyperclip  # for clipboard operations
@@ -82,33 +83,8 @@ class TemplatesPage(ctk.CTk):
         with open("templates.json", "w") as f:
             json.dump(templates, f)
             
-        # Create a new Toplevel window
-        pop_up = Toplevel(self)
-        
-        # Customize the appearance of the pop-up
-        pop_up.geometry("175x50")  # set size
-        pop_up.configure(bg="black")  # set background color
-        pop_up.overrideredirect(True)  # remove border
-        pop_up.configure(relief="ridge")  # round the corners
-        # Add a label with your message
-        Label(pop_up, text="Template Successfully Saved!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
-
-        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
-        pop_up.after(1000, pop_up.destroy)
-        # Calculate the position of the pop-up window
-        window_width = self.winfo_width()
-        window_height = self.winfo_height()
-        window_x = self.winfo_x()
-        window_y = self.winfo_y()
-
-        pop_up_width = 125
-        pop_up_height = 25
-
-        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
-        pop_up_y = window_y
-
-        # Set the position of the pop-up window
-        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")    
+        # Show the success message using CTkMessagebox
+        CTkMessagebox(title="Template 1 Successfully Saved", message="Have Peace of Mind!\nRest Easy Knowing Your Edits Have Been Saved!", icon="check")
 
     def save_template_2(self):
         template_text = self.template_textbox_2.get("1.0", "end-1c")
@@ -129,33 +105,8 @@ class TemplatesPage(ctk.CTk):
         with open("templates.json", "w") as f:
             json.dump(templates, f)
             
-        # Create a new Toplevel window
-        pop_up = Toplevel(self)
-        
-        # Customize the appearance of the pop-up
-        pop_up.geometry("175x50")  # set size
-        pop_up.configure(bg="black")  # set background color
-        pop_up.overrideredirect(True)  # remove border
-        pop_up.configure(relief="ridge")  # round the corners
-        # Add a label with your message
-        Label(pop_up, text="Template Successfully Saved!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
-
-        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
-        pop_up.after(1000, pop_up.destroy)
-        # Calculate the position of the pop-up window
-        window_width = self.winfo_width()
-        window_height = self.winfo_height()
-        window_x = self.winfo_x()
-        window_y = self.winfo_y()
-
-        pop_up_width = 125
-        pop_up_height = 25
-
-        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
-        pop_up_y = window_y
-
-        # Set the position of the pop-up window
-        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")      
+        # Show the success message using CTkMessagebox
+        CTkMessagebox(title="Template 2 Successfully Saved", message="Have Peace of Mind!\nRest Easy Knowing Your Edits Have Been Saved!", icon="check")
 
     def save_template_3(self):
         template_text = self.template_textbox_3.get("1.0", "end-1c")
@@ -176,35 +127,8 @@ class TemplatesPage(ctk.CTk):
         with open("templates.json", "w") as f:
             json.dump(templates, f)
             
-        # Create a new Toplevel window
-        pop_up = Toplevel(self)
-        
-        # Customize the appearance of the pop-up
-        pop_up.geometry("175x50")  # set size
-        pop_up.configure(bg="black")  # set background color
-        pop_up.overrideredirect(True)  # remove border
-        pop_up.configure(relief="ridge")  # round the corners
-        # Add a label with your message
-        Label(pop_up, text="Template Successfully Saved!", bg="black", fg="white").place(relx=0.5, rely=0.5, anchor="center")
-
-        # Schedule the pop-up to destroy itself after 1 seconds (1000 milliseconds)
-        pop_up.after(1000, pop_up.destroy)
-        # Calculate the position of the pop-up window
-        window_width = self.winfo_width()
-        window_height = self.winfo_height()
-        window_x = self.winfo_x()
-        window_y = self.winfo_y()
-
-        pop_up_width = 125
-        pop_up_height = 25
-
-        pop_up_x = window_x + (window_width // 2) - (pop_up_width // 2)
-        pop_up_y = window_y
-
-        # Set the position of the pop-up window
-        pop_up.geometry(f"+{pop_up_x}+{pop_up_y}")
-
-    
+        # Show the success message using CTkMessagebox
+        CTkMessagebox(title="Template 3 Successfully Saved", message="Have Peace of Mind!\nRest Easy Knowing Your Edits Have Been Saved!", icon="check")
             
 class EmailGenny(ctk.CTk):
     def __init__(self):
@@ -345,17 +269,30 @@ class EmailGenny(ctk.CTk):
         
 
     def generate_email(self):
-        # Retrieve user inputs
-        company_name = self.var_entries[0].get().strip()  # Company Name
-        name = self.var_entries[1].get().strip()  # Contact Name
-        craft = self.var_entries[2].get().strip()  # Craft
-        module = self.var_entries[3].get().strip()  # Module
-        num_images = int(self.var_entries[4].get().strip())  # Number of Images
-        image_numbers = list(range(1, num_images + 1))
-        video = self.var_entries[5].get().strip()  # Video
+        try:    
+            # Retrieve user inputs
+            company_name = self.var_entries[0].get().strip()  # Company Name
+            name = self.var_entries[1].get().strip()  # Contact Name
+            craft = self.var_entries[2].get().strip()  # Craft
+            module = self.var_entries[3].get().strip()  # Module
+            # Ensure the number of images is a non-negative integer
+            num_images_str = self.var_entries[4].get().strip()  # Number of Images
+            if not num_images_str:  # If the field is empty
+                raise ValueError("Number of Images must be filled out.")
+            if not num_images_str.isdigit():
+                raise ValueError("Number of Images must be a non-negative integer.")
+            image_numbers = int(num_images_str)
+            if image_numbers <= 0:  # If the field is zero or negative
+                raise ValueError("Number of Images must be greater than zero.")
+            video = self.var_entries[5].get().strip()  # Video
+            # Check if both module and video are filled in
+            if module and video:
+                raise ValueError("Please only fill out either the 'Module' field or the 'Video' field, not both. Leave both blank if unsure.")
+        except ValueError as e:
+            CTkMessagebox(title="Invalid Input", message=str(e), icon="cancel")
 
         # Determine the text based on the number of images
-        if len(image_numbers) == 1:
+        if image_numbers == 1:
             image_text = "this image"
             here_text = "Here"
             imag_text = "image"
@@ -364,10 +301,10 @@ class EmailGenny(ctk.CTk):
             image_text = "these images"
             imag_text = "images"
             some_text = "some"
-            here_text_list = ["Here"] * len(image_numbers)
-            if len(here_text_list) > 15:  # If there are more than 15 images
+            here_text_list = ["Here"] * image_numbers
+            if image_numbers > 15:  # If there are more than 15 images
                 here_text = "Here"
-            elif len(here_text_list) > 2:
+            elif image_numbers > 2:
                 here_text = ", ".join(here_text_list[:-1]) + ", and " + here_text_list[-1]    
             else:
                 here_text = " and ".join(here_text_list)
