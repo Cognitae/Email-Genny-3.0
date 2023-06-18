@@ -365,8 +365,10 @@ class EmailGenny(ctk.CTk):
             imag_text = "images"
             some_text = "some"
             here_text_list = ["Here"] * len(image_numbers)
-            if len(here_text_list) > 2:
-                here_text = ", ".join(here_text_list[:-1]) + ", and " + here_text_list[-1]
+            if len(here_text_list) > 15:  # If there are more than 15 images
+                here_text = "Here"
+            elif len(here_text_list) > 2:
+                here_text = ", ".join(here_text_list[:-1]) + ", and " + here_text_list[-1]    
             else:
                 here_text = " and ".join(here_text_list)
 
