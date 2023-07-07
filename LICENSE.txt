@@ -1,0 +1,15 @@
+Email Genny Software License Agreement
+
+PLEASE READ THIS SOFTWARE LICENSE AGREEMENT ("LICENSE") CAREFULLY BEFORE USING THE EMAIL GENNY SOFTWARE. BY USING THE EMAIL GENNY SOFTWARE, YOU ARE AGREEING TO BE BOUND BY THE TERMS OF THIS LICENSE. IF YOU DO NOT AGREE TO THE TERMS OF THIS LICENSE, DO NOT USE THE SOFTWARE.
+
+1. LICENSE: The Email Genny software and any files or documents accompanying this License, (the "Software") are licensed, not sold, to you by Adam Black ("Licensor") for use only under the terms of this License.
+
+2. PERMITTED USES AND RESTRICTIONS: This License allows you to install and use the Software on your devices. This Software is not for resale and you are not permitted to redistribute it in any form.
+
+3. TERM: This License shall commence upon your installation of the Software and shall terminate upon the earlier of: (a) your cessation of use of the Software; (b) the termination of Adam Black's employment with NCCER; or (c) the termination of this License by Adam Black at his discretion.
+
+4. DISCLAIMER OF LIABILITY: To the extent not prohibited by law, in no event shall the Licensor be liable for personal injury, or any incidental, special, indirect or consequential damages whatsoever, including, without limitation, damages for loss of profits, loss of data, business interruption or any other commercial damages or losses, arising out of or related to your use or inability to use the Email Genny software, however caused, regardless of the theory of liability (contract, tort or otherwise) and even if Licensor has been advised of the possibility of such damages.
+
+5. LEGAL JURISDICTION: You agree that any legal action related to this License shall be governed by the laws of the state of Florida, without regard to its conflict of laws principles.
+
+BY USING THE EMAIL GENNY SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS LICENSE AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
